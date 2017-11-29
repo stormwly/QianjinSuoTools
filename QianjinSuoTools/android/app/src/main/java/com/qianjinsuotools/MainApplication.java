@@ -34,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
                     new CodePush(
-                            "deployment-key",
+                            getResources().getString(R.string.deploymentKey),
                             getApplicationContext(),
                             BuildConfig.DEBUG,
                             R.string.CodePushPublicKey)
