@@ -1,4 +1,12 @@
 <resources>
-    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey"></string>
+    <string name="CodePushPublicKey">-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwagzSCeOULuopzbQ+yUU
+rrlBJySzwfDKS1KqEU//FqfILBhuQhQiIim2+b2dGvhvOEl/xKRp7oJ4t9XhIPgX
+Oir27HQuXoJ1qiCLQ4Nbd63x92wCI4MhcLx59CVfFhy4WHcGMAH74a46Z+RVTFPc
+NOOk50O64BIqLLwjOpMdrBhTEq7+AXzgpI2Ses8nH6qW1JhCL0Q9XbXqJFCveOVV
+XfjI/qK6JnSquPOdmJ6JaGQfEHBenGzu2KTjfwQsQKCvuCmdyIYj/MNCjT7ILAbp
+diJiP7nxIHpO5J0aPvbXl+bk8FFhq/U3l35nirakzZJOaCO2XxfO2hRspls2msRz
+PQIDAQAB
+-----END PUBLIC KEY-----</string>
     <string name="app_name">QianjinSuoTools</string>
 </resources>
