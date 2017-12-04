@@ -49,7 +49,7 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
-                    热更新1
+                    热更新3
                 </Text>
                 <TouchableOpacity onPress={this.sync.bind(this)}>
                     <Text style={styles.syncButton}>点击后台更新</Text>
