@@ -87,12 +87,12 @@ apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = true
+def enableSeparateBuildPerCPUArchitecture = false
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = true
+def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
@@ -127,7 +127,22 @@ android {
     }
 
     buildTypes {
+
+        debug{
+            //省略了其他配置
+            buildConfigField "String", "CODEPUSH_KEY", '""';
+            applicationIdSuffix ".debug"
+        }
+        staging {
+            buildConfigField "String", "CODEPUSH_KEY",'"FTOVAZui6R0CkOv5_L3sW98QrtiB877d23ce-2fb4-4f57-9f68-e727a085b9a4"'
+            applicationIdSuffix ".staging"
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
         release {
+            //省略了其他配置
+            buildConfigField "String", "CODEPUSH_KEY",'"Pyi5nxSahtOVAk7yp6BWbuabaXKv877d23ce-2fb4-4f57-9f68-e727a085b9a4"'
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"

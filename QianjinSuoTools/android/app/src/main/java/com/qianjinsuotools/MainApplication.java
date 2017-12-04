@@ -33,8 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new CodePush(
-                            getResources().getString(R.string.deploymentKey),
+                    new CodePush(BuildConfig.CODEPUSH_KEY,
                             getApplicationContext(),
                             BuildConfig.DEBUG,
                             R.string.CodePushPublicKey)
