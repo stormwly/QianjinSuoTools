@@ -6,41 +6,25 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
+    BackHandler
 } from 'react-native';
 import {toastShort} from "../common/ToastUtils"
 import {connect} from 'react-redux'
 import * as HomeListAction from '../actions/HomeListAction'
 
 class WeatherPage extends Component {
-    componentWillMount() {
-        let {getHomeList} = this.props;
-        getHomeList();
-        this.checkNetWork();
+    _onBackAndroid = () => {
+        this.props.navigation.goBack();
+        return true;
     }
 
-    checkNetWork() {
-        IOS ?
-            NetUtils.listenerNetworkState(() => {
-                NetUtils.addEventListener(NetUtils.TAG_NETWORK_CHANGE, this.handleMethod);
-            })
-            :
-            NetUtils.listenerNetworkState((isConnected) => {
-                if (!isConnected) {
-                    toastShort(NetUtils.NOT_NETWORK);
-                }
-            });
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
     }
 
     componentWillUnmount() {
-        NetUtils.removeEventListener(NetUtils.TAG_NETWORK_CHANGE, this.handleMethod);
+        BackHandler.removeEventListener('hardwareBackPress', this._onBackAndroid);
     }
-
-    // 检测网络状态
-    handleMethod = (isConnected) => {
-        if (!isConnected) {
-            toastShort(NetUtils.NOT_NETWORK);
-        }
-    };
 
     render() {
         return <View style={styles.container}>
@@ -55,12 +39,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-
-    image:{
-        height:120,
-        width:120,
-        marginTop:20
-    }
 });
 
 const mapStateToProps = (state, ownProps) => {
