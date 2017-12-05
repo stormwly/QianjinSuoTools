@@ -2,7 +2,8 @@ export default{
 
     NET_ERROR:'当前网络不可用,请检查网络连接',
 
-    //启动页
-    LAUNCH_IMG:require('../../res/images/launch_screen.png'),
+    WEATHER_ICON:require('../../res/images/weather_icon.png'),
+    FLASH_LIGHT_ICON:require('../../res/images/flash_light_icon.png'),
+    COMPRESS_ICON:require('../../res/images/compress_icon.png'),
 }
 
