@@ -1,17 +1,19 @@
-import React, {Component} from 'react'
-import store from './src/store/configureStore'
-import {Provider} from 'react-redux'
-import splash_screen from 'react-native-splash-screen'
-import RepositoryUtils from './src/common/storage/RepositoryUtils'
+import React, { Component } from "react";
+import {
+    Image,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    Dimensions
+} from "react-native";
+
 import CodePush from "react-native-code-push";
 
 // @CodePush({ checkFrequency: CodePush.CheckFrequency.MANUAL })
 let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME };
 
-import AppWithNavigationState from './src/routers/AppWithNavigationState'
-
-export default class rootApp extends Component {
-
+export default class App extends Component {
     /** Update is downloaded silently, and applied on restart (recommended) */
     sync() {
         CodePush.sync();
@@ -35,23 +37,63 @@ export default class rootApp extends Component {
         );
     }
 
-
-    componentWillMount() {
-        RepositoryUtils.init(true);//初始化操作
+    componentWillMount(){
         CodePush.disallowRestart();//页面加载的禁止重启，在加载完了可以允许重启
         this.sync();
     }
 
-    render() {
-        return <Provider store={store}>
-            <AppWithNavigationState/>
-        </Provider>
-    }
-
-    componentDidMount() {
-        splash_screen.hide();
+    componentDidMount(){
         CodePush.allowRestart();//在加载完了可以允许重启
+    }
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>
+                    热更新5
+                </Text>
+                <TouchableOpacity onPress={this.sync.bind(this)}>
+                    <Text style={styles.syncButton}>点击后台更新</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.syncImmediate.bind(this)}>
+                    <Text style={styles.syncButton}>点击立即更新</Text>
+                </TouchableOpacity>
+                <Image style={styles.image} resizeMode={Image.resizeMode.contain} source={require("./images/laptop_phone_howitworks.png")}/>
+
+            </View>
+        );
     }
 }
 
-rootApp = CodePush(codePushOptions)(rootApp);
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: "#F5FCFF",
+        paddingTop: 50
+    },
+    image: {
+        margin: 30,
+        width: Dimensions.get("window").width - 100,
+        height: 365 * (Dimensions.get("window").width - 100) / 651,
+    },
+    messages: {
+        marginTop: 30,
+        textAlign: "center",
+    },
+    restartToggleButton: {
+        color: "blue",
+        fontSize: 17
+    },
+    syncButton: {
+        color: "green",
+        fontSize: 17
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: "center",
+        margin: 20,
+        color:'red'
+    },
+});
+
+App = CodePush(codePushOptions)(App);

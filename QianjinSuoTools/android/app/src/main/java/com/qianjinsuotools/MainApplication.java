@@ -3,7 +3,9 @@ package com.qianjinsuotools;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -34,7 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-            new SplashScreenReactPackage(),
+                    new SplashScreenReactPackage(),
                     new CodePush(BuildConfig.CODEPUSH_KEY,
                             getApplicationContext(),
                             BuildConfig.DEBUG,
