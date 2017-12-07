@@ -28,11 +28,14 @@ let RNSync = {
                 }).then(response => {
                         //请求成功
                         if (response) {
-                            if (response.code === 0) {
-                                resolve && resolve(response.data);
-                                RepositoryUtils.init().saveCacheDataByKey(StorageKeys.weatherData, response.data);
+                            let weatherArray=response.HeWeather6;
+                            let weatherData=weatherArray[0];
+                            console.log(weatherData);
+                            if (weatherData.status ==='ok') {
+                                resolve && resolve(weatherData);
+                                RepositoryUtils.init().saveCacheDataByKey(StorageKeys.weatherData,weatherData);
                             } else {
-                                reject && reject(new Error(response.message))
+                                reject && reject(new Error('获取天气失败'))
                             }
                         } else {
                             reject && reject(new Error('服务端返回数据为空!'))
@@ -44,7 +47,7 @@ let RNSync = {
                 })
             },
             error => {
-                console.log("获取位置失败：" + error)
+                console.log("获取位置失败：" + error);
             }
         );
 

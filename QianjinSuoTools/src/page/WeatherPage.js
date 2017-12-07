@@ -29,8 +29,21 @@ class WeatherPage extends Component {
     }
 
     render() {
+        let weatherData=this.props.weatherData;
+        let cityName=weatherData?weatherData.basic.parent_city+":"+weatherData.basic.location:null;
+        let updateTime=weatherData?weatherData.update.loc:null;
+        let dailyForecastArray=weatherData?weatherData.daily_forecast:null;
+        let currentTime=weatherData?dailyForecastArray[0].date:null;
+        let tmpMin=weatherData?dailyForecastArray[0].tmp_min:null;
+        let tmpMax=weatherData?dailyForecastArray[0].tmp_max:null;
+        let windSc=weatherData?dailyForecastArray[0].wind_sc:null;
         return <View style={styles.container}>
-            <Text>天气预报</Text>
+            <Text>城市:{cityName}</Text>
+            <Text>日期:{currentTime}</Text>
+            <Text>最低温度:{tmpMin}</Text>
+            <Text>最高温度:{tmpMax}</Text>
+            <Text>风力:{windSc}</Text>
+            <Text>更新时间:{updateTime}</Text>
         </View>
     }
 }
