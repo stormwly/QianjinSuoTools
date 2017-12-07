@@ -38,8 +38,8 @@ class WeatherPage extends Component {
         let tmpMax=weatherData?dailyForecastArray[0].tmp_max:null;
         let windSc=weatherData?dailyForecastArray[0].wind_sc:null;
         return <View style={styles.container}>
-            <Text>城市:{cityName}</Text>
-            <Text>日期:{currentTime}</Text>
+            <Text style={styles.textStyle}>城市:{cityName}</Text>
+            <Text style={styles.textStyle}>日期:{currentTime}</Text>
             <Text>最低温度:{tmpMin}</Text>
             <Text>最高温度:{tmpMax}</Text>
             <Text>风力:{windSc}</Text>
@@ -54,6 +54,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    textStyle:{
+        color:Colors.red,
+        marginTop:5
+    }
 });
 
 const mapStateToProps = (state, ownProps) => {
