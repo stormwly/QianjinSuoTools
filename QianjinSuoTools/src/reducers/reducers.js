@@ -1,8 +1,8 @@
 import nav from './navReducers'
-import homeList from './homeListReducers'
+import weather from './weatherReducers'
 const reducers = {
     nav,
-    homeList,
+    weather,
 }
 
 export default reducers;

@@ -4,20 +4,19 @@ var repositoryUtils;
 export default class RepositoryUtils {
 
     constructor(isInit) {
-        //这里根据isInit的值可以在app启动的时候做一些初始化操作,这里进行异步读取本地存储token值
-        if (isInit === true) {
-            console.log("repositoryUtils 开始获取token--------")
-            this.getCacheDataByKey(StorageKeys.userToken).then(userToken => {
-                GLOBAL.UserToken = userToken;//存储到内存中,考虑到效率问题优先读取内存中的UserToken
-                console.log("repositoryUtils------已将userToken存储到内存中")
-
-            }).catch(err => {
-                console.log("repositoryUtils 获取token失败--------")
-                console.log(err)
-                GLOBAL.UserToken = null;
-            });
-        }
-
+        // //这里根据isInit的值可以在app启动的时候做一些初始化操作,这里进行异步读取本地存储token值
+        // if (isInit === true) {
+        //     console.log("repositoryUtils 开始获取token--------")
+        //     this.getCacheDataByKey(StorageKeys.userToken).then(userToken => {
+        //         GLOBAL.UserToken = userToken;//存储到内存中,考虑到效率问题优先读取内存中的UserToken
+        //         console.log("repositoryUtils------已将userToken存储到内存中")
+        //
+        //     }).catch(err => {
+        //         console.log("repositoryUtils 获取token失败--------")
+        //         console.log(err)
+        //         GLOBAL.UserToken = null;
+        //     });
+        // }
     }
 
     static init(isInit) {

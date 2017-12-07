@@ -12,6 +12,10 @@ const HttpUtils = {
     get: (url, params) => {
         return fetch_time_out(fetch_get_promise(url, params), HttpConfigs.timeout)
     },
+
+    getWeather: (url, params) => {
+        return fetch_time_out(fetch_get_weather_promise(url, params), HttpConfigs.timeout)
+    },
 }
 
 function fetch_time_out(fetch_promise, timeout) {
@@ -47,6 +51,24 @@ function fetch_get_promise(url, params) {
             .then((responseData) => {
                 // console.log(responseData)
                 resolve(Mock.mock(responseData))
+            })//网络请求成功返回的数据
+            .catch((err) => reject(err));
+    });
+}
+
+function fetch_get_weather_promise(url, params) {
+    if (params) {
+        url = url + '?'+ queryString.stringify(params)
+    }
+    console.log(url);
+    return new Promise(function (resolve, reject) {
+        fetch(url).then((response) => {
+            console.log(response)
+            return response.json();
+        })
+            .then((responseData) => {
+                console.log(responseData)
+                resolve(responseData)
             })//网络请求成功返回的数据
             .catch((err) => reject(err));
     });

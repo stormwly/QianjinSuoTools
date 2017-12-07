@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {toastShort} from "../common/ToastUtils"
 import {connect} from 'react-redux'
-import * as HomeListAction from '../actions/HomeListAction'
+import * as WeatherAction from '../actions/WeatherAction'
 
 class WeatherPage extends Component {
     _onBackAndroid = () => {
@@ -20,6 +20,8 @@ class WeatherPage extends Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+        let {getWeatherData} = this.props;
+        getWeatherData();
     }
 
     componentWillUnmount() {
@@ -36,31 +38,26 @@ class WeatherPage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent:'center',
-        alignItems:'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 });
 
 const mapStateToProps = (state, ownProps) => {
     let {navigation} = ownProps;
-    let {isLoading, financeList, errInfo, isRefreshing} = state.homeList;
+    let {errInfo, weatherData} = state.weather;
     return {
-        isLoading: isLoading,
-        financeList: financeList,
         errInfo: errInfo,
-        isRefreshing: isRefreshing,
+        weatherData: weatherData,
         navigation: navigation
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getHomeList: () => {
-            dispatch(HomeListAction.getHomeList());
+        getWeatherData: () => {
+            dispatch(WeatherAction.getWeatherData());
         },
-        getNetHomeList: (financeList) => {
-            dispatch(HomeListAction.getNetHomeList(financeList));
-        }
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherPage)
