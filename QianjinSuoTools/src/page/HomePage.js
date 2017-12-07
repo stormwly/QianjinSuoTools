@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     image: {
         height: 120,
         width: 120,
-        marginTop: 20
+        marginTop:10
     }
 });
