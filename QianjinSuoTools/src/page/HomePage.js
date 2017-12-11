@@ -5,9 +5,20 @@ import {
     Image,
     StyleSheet,
     TouchableOpacity,
+    Switch
 } from 'react-native';
 
+var {NativeModules} = require('react-native');
+var {lightSwitchOn, lightSwitchOff} = NativeModules.FlashUtils;
+
 export default class HomePage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            switchIsOn: false,
+        }
+    }
 
     render() {
         return <View style={styles.container}>
@@ -16,16 +27,28 @@ export default class HomePage extends Component {
                 <Image source={ConstantData.WEATHER_ICON} style={styles.image} resizeMode={'center'}/>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.8}
-                              onPress={() =>alert('手电筒')}>
+            <View style={styles.flashContainer}>
                 <Image source={ConstantData.FLASH_LIGHT_ICON} style={styles.image} resizeMode={'center'}/>
-            </TouchableOpacity>
+                <Switch
+                    onValueChange={(value) => this.switchFlash(value)}
+                    onTintColor={Colors.yellow}
+                    value={this.state.switchIsOn}/>
+            </View>
 
             <TouchableOpacity activeOpacity={0.8}
-                              onPress={() =>alert('指南针')}>
+                              onPress={() => alert('指南针')}>
                 <Image source={ConstantData.COMPRESS_ICON} style={styles.image} resizeMode={'center'}/>
             </TouchableOpacity>
         </View>
+    }
+
+    switchFlash(value) {
+        this.setState({switchIsOn: value});
+        if (value) {
+            lightSwitchOn();
+        } else {
+            lightSwitchOff();
+        }
     }
 }
 
@@ -36,9 +59,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    flashContainer: {
+        flexDirection: 'row'
+    },
     image: {
         height: 120,
         width: 120,
-        marginTop:10
-    }
+        marginTop: 10
+    },
 });

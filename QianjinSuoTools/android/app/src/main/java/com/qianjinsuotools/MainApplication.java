@@ -11,12 +11,14 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.qianjinsuotools.flashlight.FlashUtilsReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
+    private static MainApplication instance;
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
         //// 2. Override the getJSBundleFile method in order to let
@@ -37,10 +39,10 @@ public class MainApplication extends Application implements ReactApplication {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
                     new SplashScreenReactPackage(),
+                    new FlashUtilsReactPackage(),
                     new CodePush(BuildConfig.CODEPUSH_KEY,
                             getApplicationContext(),
-                            BuildConfig.DEBUG,
-                            R.string.CodePushPublicKey)
+                            BuildConfig.DEBUG)
             );
         }
 
@@ -58,6 +60,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance=this;
         SoLoader.init(this, /* native exopackage */ false);
+    }
+
+    public static MainApplication getInstance(){
+        return instance;
     }
 }
