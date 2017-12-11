@@ -40,7 +40,7 @@ class WeatherPage extends Component {
         return <View style={styles.container}>
             <Text style={styles.textStyle}>城市:{cityName}</Text>
             <Text style={styles.textStyle}>日期:{currentTime}</Text>
-            <Text>最低温度:{tmpMin}</Text>
+            <Text style={styles.textStyle}>最低温度:{tmpMin}</Text>
             <Text>最高温度:{tmpMax}</Text>
             <Text>风力:{windSc}</Text>
             <Text>更新时间:{updateTime}</Text>

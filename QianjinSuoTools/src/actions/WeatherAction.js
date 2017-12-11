@@ -8,7 +8,8 @@ export const getWeatherData = () => {
         RepositoryUtils.init().getCacheDataByKey(StorageKeys.weatherData).then(weatherData => {
             dispatch(getWeatherDataSuccess(weatherData));
         }).catch(err => {
-            console.log(err)
+            console.log(err);
+            toastShort('获取天气失败')
             dispatch(getWeatherDataFail(err.message));
         });
     }

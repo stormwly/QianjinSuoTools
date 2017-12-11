@@ -1,4 +1,5 @@
 'use strict'
+import {toastLong} from "../ToastUtils"
 var Geolocation = require('Geolocation');
 import RepositoryUtils from './RepositoryUtils'
 
@@ -47,6 +48,7 @@ let RNSync = {
                 })
             },
             error => {
+                toastLong('检查您的GPS是否打开')
                 console.log("获取位置失败：" + error);
             }
         );
