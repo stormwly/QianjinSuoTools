@@ -39,6 +39,10 @@
 			</dict>
 		</dict>
 	</dict>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>需要定位权限</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -10,6 +10,8 @@ import {
 
 var {NativeModules} = require('react-native');
 var {lightSwitchOn, lightSwitchOff} = NativeModules.FlashUtils;
+var {showCompressView} = NativeModules.CompressUtils;
+
 
 export default class HomePage extends Component {
 
@@ -36,7 +38,7 @@ export default class HomePage extends Component {
             </View>
 
             <TouchableOpacity activeOpacity={0.8}
-                              onPress={() => alert('指南针')}>
+                              onPress={() => showCompressView()}>
                 <Image source={ConstantData.COMPRESS_ICON} style={styles.image} resizeMode={'center'}/>
             </TouchableOpacity>
         </View>
